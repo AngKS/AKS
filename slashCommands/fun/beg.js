@@ -58,7 +58,7 @@ module.exports.run = async (interaction) => {
     insertData(interaction.user.username, koinsEarned)
 
     // Draw background
-    const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/fun/assets/points-bg.png?raw=true")
+    const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/points-bg.png?raw=true")
     context.drawImage(background, 0, 0, canvas.width, canvas.height)
 
     // Add user avatar
@@ -66,7 +66,7 @@ module.exports.run = async (interaction) => {
     context.drawImage(avatar, 70, (canvas.height / 2) - 75, 150, 150)
 
     // Add coin animation
-    const coin = await Canvas?.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/fun/assets/static-coin.png?raw=true")
+    const coin = await Canvas?.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/static-coin.png?raw=true")
     context.drawImage(coin, 450, 70, 200, 200)
 
     // Add text
