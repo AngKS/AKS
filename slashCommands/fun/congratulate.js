@@ -18,10 +18,11 @@ module.exports.run = async (interaction) => {
     context.drawImage(avatar, 25, canvas.height / 4, 125, canvas.height / 2)
 
     // Add user message
+    // context.strokeStyle = "#fffff"
     context.strokeRect(0, 0, canvas.width, canvas.height)
     // Select font and font size
     context.font = '60px Quicksand Bold'
-    context.fillstyle = '#242F40'
+    context.fillstyle = '#ffffff'
 
     context.fillText(`Congratulations!\n\t${interaction.options.getMember('username').user.username}`, canvas.width / 2.8, canvas.height / 2)
 

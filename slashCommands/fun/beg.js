@@ -8,7 +8,7 @@ let randomKoins = () => {
     return Math.floor(Math.random() * 100) + 1
 }
 
-let insertData = async (username, level, koins, items) => {
+let insertData = async (username, koins) => {
     MongoClient.connect(mongo).then(client => {
         console.log('Database Connected')
         const db = client.db('AKS_Bot')
@@ -34,17 +34,15 @@ let insertData = async (username, level, koins, items) => {
             else{
                 USERS.insertOne({
                     name: username,
-                    level: level,
+                    level: 1,
                     koins: koins,
-                    items: [...items]
+                    items: []
                 }).then(result => {
                     console.log(result)
                     client.close()
                 }).catch(err => console.error(err))
             }
         })
-
-        
 
     })
 
@@ -57,8 +55,7 @@ module.exports.run = async (interaction) => {
     let koinsEarned = randomKoins()
     console.log("Koins:", koinsEarned)
     // insert into database
-    insertData(interaction.user.username, 1, koinsEarned, ['testItem'])
-
+    insertData(interaction.user.username, koinsEarned)
 
     // Draw background
     const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/fun/assets/points-bg.png?raw=true")
