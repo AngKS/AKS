@@ -8,24 +8,45 @@ let randomKoins = () => {
     return Math.floor(Math.random() * 100) + 1
 }
 
-let insertData = async (name, level, koins, items) => {
+let insertData = async (username, level, koins, items) => {
     MongoClient.connect(mongo).then(client => {
         console.log('Database Connected')
         const db = client.db('AKS_Bot')
-        const collection = db.collection("users")
+        const USERS = db.collection("users")
 
-        collection.insertOne({
-            name: name,
-            level: level,
-            koins: koins,
-            items: [...items]
-        }).then(result => {
-            console.log(result)
-            client.close()
-        }).catch(err => console.error(err))
+        // Check to see if user in database
+        USERS.find().toArray().then(results => {
+            let user = results.find(obj => obj.name === username)
+            if (user){
+                USERS.findOneAndUpdate(
+                    {name : username},
+                    {
+                        $set : {
+                            koins : user.koins += koins
+                        }
+                    },
+                    {
+                        upsert : true
+                    }
+                ).then(result => console.log(result))
+                .catch(err => console.error(err))
+            }
+            else{
+                USERS.insertOne({
+                    name: username,
+                    level: level,
+                    koins: koins,
+                    items: [...items]
+                }).then(result => {
+                    console.log(result)
+                    client.close()
+                }).catch(err => console.error(err))
+            }
+        })
+
+        
 
     })
-
 
 }
 
@@ -34,7 +55,6 @@ module.exports.run = async (interaction) => {
     const context = canvas.getContext('2d')
 
     let koinsEarned = randomKoins()
-
     console.log("Koins:", koinsEarned)
     // insert into database
     insertData(interaction.user.username, 1, koinsEarned, ['testItem'])
