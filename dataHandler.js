@@ -76,11 +76,16 @@ let createCommand = async (client, guildID) => {
         {
             name: "profile",
             description: "View user profile card",
-            options : [{
-                name : "user",
+            options: [{
+                name: "user",
                 type: "USER",
                 description: "Gets the profile of the user specified."
             }]
+        },
+        // Study command
+        {
+            name: "study",
+            description: "Study Command"
         }
 
     ]
