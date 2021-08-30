@@ -4,6 +4,9 @@ const seconds = 1000
 const minutes = 60 * seconds
 const hour = 60 * minutes
 
+var start_time
+var end_time
+
 let startPOMO = async(channel) =>{
     // Countdown clock
     let remTime = 25
@@ -12,16 +15,20 @@ let startPOMO = async(channel) =>{
 
     let countdownEmbed = new MessageEmbed()
         .setTitle('POMODORO Session')
+        .setColor("#DA344D")
         .setThumbnail("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/Clock.gif?raw=true")
         .addField(`STATUS: ${status}`, `Session Started with ${remTime} minutes` )
     let countdown = await channel.send({embeds : [countdownEmbed]})
 
-    const collector = channel.createMessageComponentCollector({ time: 30000, max: 1 })
+    const collector = channel.createMessageComponentCollector()
     collector.on('collect', async i => {
         if (i.customId == 'start') {
-            startPOMO(result)
+            startPOMO(channel)
         }
         if (i.customId == 'stop') {
+            end_time = new Date().getTime()
+            diff = end_time - start_time
+            console.log(`Session active for ${Math.floor(diff / 1000 % 60)} seconds`)
             countdown.delete()
             return channel.send(`POMODORO Session has stopped.`)
         }
@@ -91,6 +98,8 @@ module.exports.run = async(interaction) => {
         const collector = result.createMessageComponentCollector({ time: 30000, max: 1 })
         collector.on('collect', async i => {
             if (i.customId == 'start') {
+                start_time = new Date().getTime()
+                
                 startPOMO(result)
             }
             if (i.customId == 'stop') {
