@@ -38,18 +38,22 @@ module.exports.run = async (interaction) => {
         n = Math.floor(n)
     }
     let doggoPara = doggoGenerator(n)
-    
-    // let embedCreator = new MessageEmbed()
-    //     .setColor('#fffff')
-    //     .setTitle(`${n} ${n > 1 ? 'paragraph' : 'paragraphs'} of Doggo Ipsum`) 
-    //     .setURL("https://www.github.com/angks/aks")
-    //     .setAuthor(`Generated for ${interaction.}`)
+    let embedCreator = new MessageEmbed()
+        .setColor('#fffff')
+        .setTitle(`${n} ${n === 1 ? 'paragraph' : 'paragraphs'} of Doggo Ipsum`)
+        .setURL("https://www.github.com/angks/aks")
+        .setAuthor(`Generated for ${interaction.user.username}`, interaction.user.displayAvatarURL({dynamic: true}))
+        .setThumbnail('https://github.com/AngKS/MakanBot/blob/master/doge.jpg?raw=true')
+        .setDescription(doggoPara)
+        .setFooter(`Brought to you by AKS`, 'https://angks.github.io/static/media/520x520.ebb5c5d5.png')
+        
 
-    return await interaction.reply({content: doggoPara})
+
+    return await interaction.channel.send({ embeds: [embedCreator] })
 
 }
 
 module.exports.help = {
-    name : "doggo",
-    aliases : []
+    name: "doggo",
+    aliases: []
 }
