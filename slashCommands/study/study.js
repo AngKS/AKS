@@ -30,7 +30,15 @@ let startPOMO = async(channel) =>{
             diff = end_time - start_time
             console.log(`Session active for ${Math.floor(diff / 1000 % 60)} seconds`)
             countdown.delete()
-            return channel.send(`POMODORO Session has stopped.`)
+
+            let sessionEnd = new MessageEmbed()
+                .setTitle("POMODORO Session has Stopped")
+                .setColor("#fffff")
+                .setThumbnail("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/congrats.gif?raw=true")
+                .setDescription(`Session active for ${Math.floor(diff / 1000 % 60)} seconds`)
+                .setFooter(`Hope you had a fulfiling study session!`)
+
+            return channel.send({content:`POMODORO Session has stopped.`, embeds: [sessionEnd]})
         }
     })
 
