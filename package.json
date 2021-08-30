@@ -19,6 +19,7 @@
     "dotenv": "^10.0.0",
     "fs": "0.0.1-security",
     "gtts": "^0.2.1",
+    "mongodb": "^4.1.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.12",
     "text-to-mp3": "^1.0.4",

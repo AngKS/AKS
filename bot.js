@@ -1,5 +1,7 @@
 const { Client, Intents, Collection } = require('discord.js');
 const { prefix, token, clientID, guildID } = require("./config.json")
+
+
 const fs = require('fs');
 
 const client = new Client({
@@ -11,6 +13,8 @@ const client = new Client({
 client.aliases = new Collection()
 client.events = new Collection()
 client.slashCommands = new Collection()
+// client.users = new Collection()
+
 module.exports.Client = client
 
 

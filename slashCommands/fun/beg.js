@@ -1,9 +1,32 @@
 
 const { Client, Intents, MessageAttachment } = require('discord.js');
+const { mongo } = require("../database/db.json")
 const Canvas = require('canvas');
+const MongoClient = require('mongodb').MongoClient
 
-let randomKoins = () =>{
+let randomKoins = () => {
     return Math.floor(Math.random() * 100) + 1
+}
+
+let insertData = async (name, level, koins, items) => {
+    MongoClient.connect(mongo).then(client => {
+        console.log('Database Connected')
+        const db = client.db('AKS_Bot')
+        const collection = db.collection("users")
+
+        collection.insertOne({
+            name: name,
+            level: level,
+            koins: koins,
+            items: [...items]
+        }).then(result => {
+            console.log(result)
+            client.close()
+        }).catch(err => console.error(err))
+
+    })
+
+
 }
 
 module.exports.run = async (interaction) => {
@@ -11,6 +34,11 @@ module.exports.run = async (interaction) => {
     const context = canvas.getContext('2d')
 
     let koinsEarned = randomKoins()
+
+    console.log("Koins:", koinsEarned)
+    // insert into database
+    insertData(interaction.user.username, 1, koinsEarned, ['testItem'])
+
 
     // Draw background
     const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/fun/assets/points-bg.png?raw=true")
@@ -28,10 +56,10 @@ module.exports.run = async (interaction) => {
     context.strokeRect(0, 0, canvas.width, canvas.height)
     context.font = '100px Roboto Mono'
     context.fillstyle = "#000000"
-    context.fillText(`${koinsEarned}`, canvas.width / 2 ,(canvas.height / 2 + 50))
+    context.fillText(`${koinsEarned}`, canvas.width / 2, (canvas.height / 2 + 50))
 
     const attachment = new MessageAttachment(canvas.toBuffer(), 'earned.png')
-    await interaction.reply({content: `Congratulations ${interaction.user}. You just earned **${koinsEarned}** koins!!` , files: [attachment] })
+    await interaction.reply({ content: `Congratulations **${interaction.user.username}**. You just earned **${koinsEarned}** koins!!`, files: [attachment] })
 
 }
 
