@@ -20,23 +20,25 @@ const applyText = (canvas, text) => {
 
 module.exports.run = async (interaction) => {
 
+    let _user = interaction.options.getMember('user') === null ? interaction.user : interaction.options.getMember('user').user
+
     const canvas = Canvas.createCanvas(550, 700)
     const context = canvas.getContext('2d')
 
     const userCoinX = 215
     // draw background
-    const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/profile2-BG.png?raw=true")
+    const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/profile-BG.png?raw=true")
     context.drawImage(background, 0, 0, canvas.width, canvas.height)
 
 
     // Add user avatar
-    const avatar = await Canvas?.loadImage(interaction.user.displayAvatarURL({ format: 'png' || 'jpg' || 'gif', dynamic: true }))
+    const avatar = await Canvas?.loadImage(_user.displayAvatarURL({ format: 'png' || 'jpg' || 'gif', dynamic: true }))
     context.drawImage(avatar, 80, 100, 200, 200)
 
     // Add info
-    context.font = applyText(canvas, interaction.user.username)
+    context.font = applyText(canvas, _user.username)
     context.fillStyle = "#fffff"
-    context.fillText(`${interaction.user.username}`, 300, 200)
+    context.fillText(`${_user.username}`, 300, 200)
 
     // Add coin picture
     const coin = await Canvas?.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/static-coin.png?raw=true")
@@ -48,7 +50,7 @@ module.exports.run = async (interaction) => {
         const USERS = db.collection("users")
 
         USERS.find().toArray().then(results => {
-            let user = results.find(obj => obj.name === interaction.user.username)
+            let user = results.find(obj => obj.name === _user.username)
 
             if (user){
                 context.font = ('60px Quicksand Bold')

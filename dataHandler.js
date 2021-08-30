@@ -75,7 +75,12 @@ let createCommand = async (client, guildID) => {
         // Get user profile
         {
             name: "profile",
-            description: "View user profile card"
+            description: "View user profile card",
+            options : [{
+                name : "user",
+                type: "USER",
+                description: "Gets the profile of the user specified."
+            }]
         }
 
     ]
