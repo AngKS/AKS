@@ -7,7 +7,7 @@ const { guildID } = require("../config.json")
 
 client.on('ready', async () => {
     const names = ["127.0.0.1", "/help", "vege-cast", "Kah Shin"]
-    const types = ["LISTENING", "PLAYING", "STREAMING"]
+    const types = ["LISTENING", "PLAYING", "STREAMING", "COMPETING"]
 
     client.user.setPresence({ activities: [{ name: names[0], type: "LISTENING" }] })
     setInterval(() => {
