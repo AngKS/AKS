@@ -1,7 +1,7 @@
 
 const client = require("../bot.js").Client
 const { createCommand } = require("../dataHandler")
-const { guildID } = require("../config.json")
+const { token,guildID } = require("../config.json")
 
 
 
@@ -19,3 +19,4 @@ client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
     createCommand(client, guildID)
 });
+

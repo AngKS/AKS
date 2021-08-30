@@ -63,6 +63,10 @@ let createCommand = async (client, guildID) => {
                 type: "INTEGER",
                 description: "Input the amount of paragraphs you want to generate(max. 3)"
             }]
+        },
+        {
+            name : "beg",
+            description : "You will receive a random amount of koins."
         }
 
     ]
