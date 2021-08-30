@@ -1,5 +1,6 @@
 
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js')
+const clipboardy = require("clipboardy")
 
 const poems = [
     "Over hill, over dale, Thorough bush, thorough brier, Over park, over pale,Thorough flood, thorough fire! I do wander everywhere,Swifter than the moon\'s sphere; And I serve the Fairy Queen, To dew her orbs upon the green; The cowslips tall her pensioners be; In their gold coats spots you see; Those be rubies, fairy favours; In those freckles live their savours; I must go seek some dewdrops here, And hang a pearl in every cowslip\'s ear.",
@@ -30,6 +31,22 @@ let doggoGenerator = (para = 1) => {
 
 
 module.exports.run = async (interaction) => {
+
+    const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+                .setLabel('Copy raw text')
+                .setStyle('PRIMARY')
+                .setCustomId("clipboard")
+        )
+        .addComponents(
+            new MessageButton()
+                .setLabel('Copy HTML')
+                .setStyle('DANGER')
+                .setCustomId("html")
+        )
+
+
     let n = interaction.options.getInteger("doggo")
     if (n === undefined || n === 0) {
         n = 1
@@ -42,14 +59,24 @@ module.exports.run = async (interaction) => {
         .setColor('#fffff')
         .setTitle(`${n} ${n === 1 ? 'paragraph' : 'paragraphs'} of Doggo Ipsum`)
         .setURL("https://www.github.com/angks/aks")
-        .setAuthor(`Generated for ${interaction.user.username}`, interaction.user.displayAvatarURL({dynamic: true}))
+        .setAuthor(`Generated for ${interaction.user.username}`, interaction.user.displayAvatarURL({ dynamic: true }))
         .setThumbnail('https://github.com/AngKS/MakanBot/blob/master/doge.jpg?raw=true')
         .setDescription(doggoPara)
         .setFooter(`Brought to you by AKS`, 'https://angks.github.io/static/media/520x520.ebb5c5d5.png')
-        
 
+    const collector = interaction.channel.createMessageComponentCollector({ time: 15000, max: 5 })
+    collector.on('collect', async i => {
+        if (i.customId == 'clipboard') {
+            clipboardy.writeSync(doggoPara)
+            await interaction.reply({ content: "Text successfully copied to clipboard" })
+        }
+        if (i.customId == 'html') {
+            clipboardy.writeSync(`<p>${doggoPara}</p>`)
+            await interaction.channel.send({ content: "Text successfully copied to clipboard" })
+        }
+    })
 
-    return await interaction.channel.send({ embeds: [embedCreator] })
+    return await interaction.channel.send({ embeds: [embedCreator], components: [row] })
 
 }
 
