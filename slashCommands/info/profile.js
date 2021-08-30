@@ -25,7 +25,7 @@ module.exports.run = async (interaction) => {
 
     const userCoinX = 215
     // draw background
-    const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/profile-BG.png?raw=true")
+    const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/profile2-BG.png?raw=true")
     context.drawImage(background, 0, 0, canvas.width, canvas.height)
 
 
@@ -55,7 +55,14 @@ module.exports.run = async (interaction) => {
                 context.fillText(user.level, 300, 330)
                 context.fillText(user.koins, userCoinX, 420)
                 const attachment = new MessageAttachment(canvas.toBuffer(), 'profile.png')
-                interaction.reply({ files: [attachment] })
+                return interaction.reply({ files: [attachment] })
+            }
+            else{
+                context.font = ('60px Quicksand Bold')
+                context.fillText("1", 300, 330)
+                context.fillText(0, userCoinX, 420)
+                const attachment = new MessageAttachment(canvas.toBuffer(), 'profile.png')
+                return interaction.reply({ files: [attachment] })
             }
 
         })
