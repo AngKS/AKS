@@ -2,6 +2,8 @@
 const client = require("../bot.js").Client
 const { createCommand } = require("../dataHandler")
 const { token,guildID } = require("../config.json")
+const MongoClient = require('mongodb').MongoClient
+const {mongo} = require("../slashCommands/database/db.json")
 
 
 
@@ -14,7 +16,6 @@ client.on('ready', async () => {
         let randNum = Math.floor(Math.random() * names.length)
         client.user.setPresence({ activities: [{ name: names[randNum].toString(), type: types[Math.floor(Math.random() * types.length)] }] })
     }, 5000);
-
 
     console.log(`Logged in as ${client.user.tag}!`);
     createCommand(client, guildID)

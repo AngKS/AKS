@@ -42,6 +42,7 @@ let createCommand = async (client, guildID) => {
             name: 'help',
             description: 'Shows you all the help you will need!'
         },
+        // Congratulate comand
         {
             name: 'congratulate',
             description: 'Creates a banner to congratulate the user with a custom message',
@@ -51,22 +52,30 @@ let createCommand = async (client, guildID) => {
                 description: 'Input the name of the person you want to congratulate'
             }]
         },
+        // Get Datetime command
         {
             name: "date",
             description: "The bot will return the current date time to you."
         },
+        // Generate Doggo Ipsum Command
         {
             name: "doggo",
             description: "The bot will generate a paragraph of Doggo Lingo placeholder text.",
-            options : [{
+            options: [{
                 name: "doggo",
                 type: "INTEGER",
                 description: "Input the amount of paragraphs you want to generate(max. 3)"
             }]
         },
+        // Beg for koins command
         {
-            name : "beg",
-            description : "You will receive a random amount of koins."
+            name: "beg",
+            description: "You will receive a random amount of koins."
+        },
+        // Get user profile
+        {
+            name: "profile",
+            description: "View user profile card"
         }
 
     ]
