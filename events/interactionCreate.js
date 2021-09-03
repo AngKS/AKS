@@ -11,7 +11,7 @@ client.on('interactionCreate', async interaction => {
         if (slashCommands) slashCommands.run(interaction, client)
     }
     catch{
-        console.error(err)
+        console.error('[ERROR HANDLER] - ', err)
         await interaction.reply({content: 'There was an error with the command', ephemeral:true})
     }
     
