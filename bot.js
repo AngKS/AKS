@@ -5,6 +5,7 @@ const MongoClient = require('mongodb').MongoClient
 
 // Distube for music
 const Distube = require("distube")
+const SpotifyPlugin = require("@distube/spotify")
 
 const fs = require('fs');
 
@@ -14,7 +15,13 @@ const client = new Client({
     allowedMentions: { parse: ['users', 'roles'], repliedUser: true }
 });
 
-const distube = new Distube.default(client)
+const distube = new Distube.default(client, {
+    searchSongs: 5,
+    leaveOnEmpty: true,
+    leaveOnFinish: true,
+    leaveOnStop: false,
+    // plugins: [new SpotifyPlugin()]
+})
 
 client.aliases = new Collection()
 client.events = new Collection()
@@ -70,6 +77,9 @@ fs.readdirSync(`./slashCommands/`).forEach(dir => {
     })
 })
 
-
+distube
+    .on('playSong', (queue, song) => {
+        queue.textChannel.send({content: `Now Playing ${song.name}`})
+    })
 
 client.login(token);
