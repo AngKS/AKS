@@ -20,7 +20,7 @@ let startPOMO = async(channel) =>{
         .addField(`STATUS: ${status}`, `Session Started with ${remTime} minutes` )
     let countdown = await channel.send({embeds : [countdownEmbed]})
 
-    const collector = channel.createMessageComponentCollector()
+    const collector = channel.createMessageComponentCollector({ time: 30000, max: 1 })
     collector.on('collect', async i => {
         if (i.customId == 'start') {
             startPOMO(channel)

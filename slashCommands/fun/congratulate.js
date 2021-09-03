@@ -14,8 +14,15 @@ module.exports.run = async (interaction) => {
     context.drawImage(background, 0, 0, canvas.width, canvas.height)
 
     // Add user avatar
-    const avatar = await Canvas?.loadImage(interaction.options.getMember('username').user.displayAvatarURL({ format: 'png' || 'jpg' || 'gif', dynamic: true }))
-    context.drawImage(avatar, 25, canvas.height / 4, 125, canvas.height / 2)
+    try{
+        const avatar = await Canvas?.loadImage(interaction.options.getMember('username').user.displayAvatarURL({ format: 'png' || 'jpg' || 'gif', dynamic: true }))
+        context.drawImage(avatar, 25, canvas.height / 4, 125, canvas.height / 2)
+    }
+    catch (err){
+        const avatar = await Canvas?.loadImage(interaction.user.displayAvatarURL({ format: 'png' || 'jpg' || 'gif', dynamic: true }))
+        context.drawImage(avatar, 25, canvas.height / 4, 125, canvas.height / 2)
+    }
+    
 
     // Add user message
     // context.strokeStyle = "#fffff"
@@ -23,12 +30,12 @@ module.exports.run = async (interaction) => {
     // Select font and font size
     context.font = '60px Quicksand Bold'
     context.fillstyle = '#ffffff'
-
-    context.fillText(`Congratulations!\n\t${interaction.options.getMember('username').user.username}`, canvas.width / 2.8, canvas.height / 2)
+    console.log(interaction.options.getMember('username'))
+    context.fillText(`Congratulations!\n\t${interaction.options.getMember('username') === null ? interaction.user.username : interaction.options.getMember('username').user.username}`, canvas.width / 2.8, canvas.height / 2)
 
     // Attached to interaction reply
     const attachment = new MessageAttachment(canvas.toBuffer(), 'interaction.png')
-    await interaction.reply({content : `CONGRATULATIONSSS!!! ${interaction.options.getMember('username').user}` , files: [attachment] })
+    await interaction.reply({ content: `CONGRATULATIONSSS!!! ${interaction.options.getMember('username') === null ? interaction.user.username : interaction.options.getMember('username').user.username}` , files: [attachment] })
 }
 
 module.exports.help = {
