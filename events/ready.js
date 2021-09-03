@@ -19,5 +19,8 @@ client.on('ready', async () => {
 
     console.log(`Logged in as ${client.user.tag}!`);
     createCommand(client, guildID)
+
+    
+
 });
 

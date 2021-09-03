@@ -3,14 +3,18 @@ const { prefix, token, clientID, guildID } = require("./config.json")
 const { mongo } = require("./slashCommands/database/db.json")
 const MongoClient = require('mongodb').MongoClient
 
+// Distube for music
+const Distube = require("distube")
 
 const fs = require('fs');
 
 const client = new Client({
     // intents: [Intents.FLAGS.GUILDS],
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES],
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES],
     allowedMentions: { parse: ['users', 'roles'], repliedUser: true }
 });
+
+const distube = new Distube.default(client)
 
 client.aliases = new Collection()
 client.events = new Collection()
@@ -18,7 +22,7 @@ client.slashCommands = new Collection()
 client.Users = new Collection()
 
 module.exports.Client = client
-
+module.exports.Distube = distube
 
 // Events handler
 fs.readdir(`./events/`, (err, files) => {
@@ -65,7 +69,6 @@ fs.readdirSync(`./slashCommands/`).forEach(dir => {
         })
     })
 })
-
 
 
 

@@ -86,6 +86,16 @@ let createCommand = async (client, guildID) => {
         {
             name: "study",
             description: "Study Command"
+        },
+        // Music Play command
+        {
+            name: 'play',
+            description: "Allows the user to search and queue a song",
+            options : [{
+                name: 'url',
+                type: 'STRING',
+                description: "Input the Song name/URL"
+            }]
         }
 
     ]
