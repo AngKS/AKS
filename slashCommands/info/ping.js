@@ -10,5 +10,6 @@ module.exports.run = async (interaction) => {
 
 module.exports.help = {
     name: 'ping',
-    aliases: []
+    aliases: [],
+    genre: 'info'
 }

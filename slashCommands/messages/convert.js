@@ -56,5 +56,6 @@ module.exports.run = async (interaction) => {
 
 module.exports.help = {
     name: "convert",
-    aliases: ['c']
+    aliases: ['c'],
+    genre: 'messages'
 }

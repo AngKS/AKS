@@ -40,5 +40,6 @@ module.exports.run = async (interaction) => {
 
 module.exports.help = {
     name: 'congratulate',
-    aliases: ['congrat', 'congrats']
+    aliases: ['congrat', 'congrats'],
+    genre: 'fun'
 }

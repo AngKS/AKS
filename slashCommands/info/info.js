@@ -23,5 +23,5 @@ module.exports.run = async (interaction) => {
 module.exports.help = {
     name: 'info',
     aliases: [],
-
+    genre: 'info'
 }

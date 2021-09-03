@@ -123,5 +123,7 @@ module.exports.run = async(interaction) => {
 
 module.exports.help ={
     name : "study",
-    description : "Study command to start a study session"
+    description : "Study command to start a study session",
+    aliases: [],
+    genre: 'study'
 }
