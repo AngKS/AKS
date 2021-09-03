@@ -2,8 +2,7 @@
 const client = require("../bot.js").Client
 const { createCommand } = require("../dataHandler")
 const { token,guildID } = require("../config.json")
-const MongoClient = require('mongodb').MongoClient
-const {mongo} = require("../slashCommands/database/db.json")
+
 
 
 

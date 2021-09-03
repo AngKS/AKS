@@ -1,7 +1,7 @@
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const Canvas = require('canvas');
 const { MongoClient } = require('mongodb');
-const {mongo} = require("../database/db.json")
+const {mongo} = require("../../database/db.json")
 
 
 const applyText = (canvas, text) => {

@@ -1,7 +1,5 @@
 const { Client, Intents, Collection } = require('discord.js');
 const { prefix, token, clientID, guildID } = require("./config.json")
-const { mongo } = require("./slashCommands/database/db.json")
-const MongoClient = require('mongodb').MongoClient
 
 // Distube for music
 const Distube = require("distube")
