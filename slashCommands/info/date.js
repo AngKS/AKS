@@ -7,5 +7,6 @@ module.exports.run = async (interaction) => {
 
 module.exports.help = {
     name: 'date',
-    aliases: ['d']
+    aliases: ['d'],
+    genre: 'info'
 }

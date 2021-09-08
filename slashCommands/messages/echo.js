@@ -5,5 +5,6 @@ module.exports.run = async (interaction) => {
 
 module.exports.help = {
     name: 'echo',
-    aliases: ['e']
+    aliases: ['e'],
+    genre: 'messages'
 }

@@ -80,5 +80,6 @@ module.exports.run = async (interaction) => {
 
 module.exports.help = {
     name: "profile",
-    aliases: ['p', 'prof']
+    aliases: ['p', 'prof'],
+    genre: 'info'
 }

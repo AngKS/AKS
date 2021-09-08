@@ -2,13 +2,6 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js')
 const fs = require('fs')
 
-let commands = async () => {
-    fs.readdir("../../slashCommands", (err, files) => {
-        console.log(files)
-
-    })
-}
-
 module.exports.run = async (interaction, client) => {
     const row = new MessageActionRow()
         .addComponents(
@@ -23,10 +16,14 @@ module.exports.run = async (interaction, client) => {
                 .setStyle('LINK')
                 .setURL('https://github.com/angks/aks')
         )
-    client.slashCommands.map(command => {
-        console.log(command)
+            
 
-    })
+    let funCommands = client.slashCommands.filter(cmnd => cmnd.help.genre === 'fun')
+    // let funCommands = client.slashCommands.filter(cmnd => cmnd.help.genre === 'fun')
+    console.log(funCommands)
+
+
+
 
 
 
@@ -34,12 +31,18 @@ module.exports.run = async (interaction, client) => {
         .setColor('#0099ff')
         .setTitle(`AKS Bot's Help Menu`)
         .setURL('https://discord.js.org')
+        .addFields(
+            { name: client.slashCommands, values: client.slashCommands.help }
+        )
         .setDescription('Some description here');
-    await interaction.reply({ embeds: [embed], components: [row] });
+
+
+    // await interaction.reply({ embeds: [embed], components: [row] });
 
 }
 
 module.exports.help = {
     name: "help",
-    aliases: ['h']
+    aliases: ['h'],
+    genre: 'info'
 }
