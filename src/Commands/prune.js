@@ -20,11 +20,11 @@ module.exports = new Command({
 
         const amountParsed = parseInt(amount)
 
-        if (amountParsed > 100) return message.reply({ content: `My dude, there's only so much i can do... *max. 100 messages*` })
+        if (amountParsed > 100) return message.reply({ content: `My dude, there's only so much i can do... *(max. 100 messages)*` })
 
         message.channel.bulkDelete(amountParsed)
 
-        const msg = await message.send(`Successfully cleared ${amountParsed} messages!`)
+        const msg = await message.channel.send(`Successfully cleared ${amountParsed} messages!`)
 
         if (msg) setTimeout(() => { msg.delete() }, 5000)
 

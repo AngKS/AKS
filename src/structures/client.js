@@ -22,7 +22,7 @@ class Client extends Discord.Client{
         const commandFiles = fs.readdirSync("../src/Commands").filter(file => file.endsWith(".js"))
         const commands = commandFiles.map(file => require(`../Commands/${file}`))
         commands.forEach(command => {
-            console.log(`[INITIALIZE] -  ${command} command loaded`)
+            console.log(`[INITIALIZE] -  ${command.name} command loaded`)
             this.commands.set(command.name, command)
         })
 
@@ -40,8 +40,8 @@ class Client extends Discord.Client{
         this.removeAllListeners()
 
         this.on("ready", async () => {
-            const cmds = await this.application.commands.set(slashCommands)
-            cmds.forEach(cmd => console.log(`[INITIALIZE] - ${cmd} SLASH command loaded`))
+            const cmds = await this.guilds.cache.get(guildID)?.commands.set(slashCommands)
+            cmds.forEach(cmd => console.log(`[INITIALIZE] - ${cmd.name} SLASH command loaded`))
         })
 
         // Read events folder
@@ -56,7 +56,6 @@ class Client extends Discord.Client{
             })
 
         // Login
-
         this.login(token)
     }
 
