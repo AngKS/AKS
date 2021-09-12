@@ -1,8 +1,8 @@
 const Discord = require("discord.js")
-const Command = require("./Command.js.js")
-const event = require("./event.js.js")
+const Command = require("./Command.js")
+const event = require("./event.js")
 
-const {token, clientID, guildID, prefix} = require("../../config.json")
+const {token, clientID, guildID, prefix} = require("../data/config.json")
 
 const intents = new Discord.Intents(32767)
 
@@ -19,7 +19,7 @@ class Client extends Discord.Client{
     }
 
     start(token){
-        const commandFiles = fs.readdirSync("./src/Commands").filter(file => file.endsWith(".js"))
+        const commandFiles = fs.readdirSync("../src/Commands").filter(file => file.endsWith(".js"))
         const commands = commandFiles.map(file => require(`../Commands/${file}`))
         commands.forEach(command => {
             console.log(`[INITIALIZE] -  ${command} command loaded`)
@@ -27,7 +27,7 @@ class Client extends Discord.Client{
         })
 
         const slashCommands = commands
-            .filter(cmd => ["BOTH", "SLASH"].includes(command.type))
+            .filter(cmd => ["BOTH", "SLASH"].includes(cmd.type))
             .map(command => ({
                 name : command.name.toLowerCase(),
                 description: command.description,
@@ -46,7 +46,7 @@ class Client extends Discord.Client{
 
         // Read events folder
 
-        fs.readdirSync("./src/Events")
+        fs.readdirSync("../src/Events")
             .filter(file => file.endsWith(".js"))
             .forEach(file => {
                 const event = require(`../Events/${file}`)

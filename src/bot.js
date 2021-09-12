@@ -1,9 +1,9 @@
 
 console.clear()
 
-const Client = require('./src/structures/client')
+const Client = require('./structures/Client')
 
-const { token } = require("./config.json")
-
+const { token } = require("./data/config.json")
 const client = new Client()
+
 client.start(token)
