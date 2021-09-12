@@ -28,7 +28,7 @@ module.exports = new Command({
         const canvas = Canvas.createCanvas(550, 700)
         const context = canvas.getContext('2d')
         console.log(_user)
-        
+
         const userCoinX = 215
         // draw background
         const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/profile-BG.png?raw=true")
