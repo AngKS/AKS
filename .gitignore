@@ -1,3 +1,4 @@
-src/config.json
-src/database/db.json
-node_modules
+.DS_Store
+node_modules/
+config.json
+db.json
