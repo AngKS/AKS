@@ -1,3 +1,4 @@
+
 const Event = require("../structures/Event")
 
 module.exports = new Event("voiceStateUpdate", (prevState, newState) => {
@@ -8,7 +9,5 @@ module.exports = new Event("voiceStateUpdate", (prevState, newState) => {
     if (prevState.channel !== null && newState.channel === null) stateChange.type = "LEAVE"
     if (prevState.channel !== null && newState.channel !== null) stateChange.type = "MOVE"
     if (prevState.channel === null && newState.channel === null) return
-
-    return stateChange
 
 })

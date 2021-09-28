@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
+<script>
+    let axios = require("axios")
+
+    let sendWebHook = () => {
+        let payload = {
+            title: "Testing Webhook",
+            description: "Testing 1...2...3..."
+        }
+        console.log('Hello there!')
+        
+        axios.defaults.headers.post['Content-Type'] = 'application/json';
+        axios.post("https://discord.com/api/webhooks/892348360407805963/IEY2Wxyf-GSeEBcETcZDgW_LmwEgVYA8Fb5cb1tx4OCaIMku1eEnTcNNHLhhviDGqGmt", payload).then(() => {
+            alert("Sent!")
+        })
+
+    }
+
+
+</script>
+
 <body class="dimensions rounded">
     <header class="d-flex align-items-center bg-primary p-3">
         <img class="logo img-fluid w-50" src="https://avatars.githubusercontent.com/u/60446729?v=4" alt="">
