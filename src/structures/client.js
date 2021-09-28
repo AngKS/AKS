@@ -15,6 +15,7 @@ class Client extends Discord.Client{
     constructor(){
         super({ intents })
          this.commands = new Discord.Collection()
+         this.studyMembers = new Discord.Collection()
          this.prefix = prefix
     }
 
