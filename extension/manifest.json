@@ -1,0 +1,29 @@
+{
+    "name": "AKS-Bot",
+    "description": "AKS-Bot's Study session Extension for getting things done productively in Discord!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "https://github.com/AngKS/AKS/blob/master/aks.png?raw=true",
+            "32": "https://github.com/AngKS/AKS/blob/master/aks.png?raw=true",
+            "48": "https://github.com/AngKS/AKS/blob/master/aks.png?raw=true",
+            "128": "https://github.com/AngKS/AKS/blob/master/aks.png?raw=true"
+        },
+        "web_accessible_resources": [
+            {
+                "resources": [
+                    "../assets/"
+                ],
+                "matches": "chrome-extension://obhomfmjlnppahldideknpjonfelokag/popup.html#"
+            }
+        ]
+    }
+}

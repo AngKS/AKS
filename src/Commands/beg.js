@@ -9,7 +9,7 @@ let randomKoins = () => {
     return Math.floor(Math.random() * 100) + 1
 }
 
-let insertData = async (username, koins) => {
+let insertData = async (_user, koins) => {
     MongoClient.connect(mongo).then(client => {
         console.log('Database Connected')
         const db = client.db('AKS_Bot')
@@ -17,10 +17,10 @@ let insertData = async (username, koins) => {
 
         // Check to see if user in database
         USERS.find().toArray().then(results => {
-            let user = results.find(obj => obj.name === username)
+            let user = results.find(obj => obj.name === _user.username)
             if (user) {
                 USERS.findOneAndUpdate(
-                    { name: username },
+                    { name: _user.username },
                     {
                         $set: {
                             koins: user.koins += koins
@@ -34,7 +34,8 @@ let insertData = async (username, koins) => {
             }
             else {
                 USERS.insertOne({
-                    name: username,
+                    name: _user.username,
+                    tag: _user.tag,
                     level: 1,
                     koins: koins,
                     items: []
@@ -63,7 +64,7 @@ module.exports = new Command({
         let koinsEarned = randomKoins()
         console.log("Koins:", koinsEarned)
         // insert into database
-        insertData(message.user.username, koinsEarned)
+        insertData(message.user, koinsEarned)
 
         // Draw background
         const background = await Canvas.loadImage("https://github.com/AngKS/AKS/blob/master/slashCommands/assets/points-bg.png?raw=true")
@@ -84,7 +85,7 @@ module.exports = new Command({
         context.fillText(`${koinsEarned}`, canvas.width / 2, (canvas.height / 2 + 50))
 
         const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'earned.png')
-        await message.reply({ content: `Congratulations **${message.user.username}**. You just earned **${koinsEarned}** koins!!`, files: [attachment] })
+        await message.channel.send({ content: `Congratulations **${message.user.username}**. You just earned **${koinsEarned}** koins!!`, files: [attachment] })
 
 
     }

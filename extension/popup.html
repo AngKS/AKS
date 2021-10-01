@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<script>
+    let axios = require("axios")
+
+    let sendWebHook = () => {
+        let payload = {
+            title: "Testing Webhook",
+            description: "Testing 1...2...3..."
+        }
+        console.log('Hello there!')
+        
+        axios.defaults.headers.post['Content-Type'] = 'application/json';
+        axios.post("https://discord.com/api/webhooks/892348360407805963/IEY2Wxyf-GSeEBcETcZDgW_LmwEgVYA8Fb5cb1tx4OCaIMku1eEnTcNNHLhhviDGqGmt", payload).then(() => {
+            alert("Sent!")
+        })
+
+    }
+
+
+</script>
+
+<body class="dimensions rounded">
+    <header class="d-flex align-items-center bg-primary p-3">
+        <img class="logo img-fluid w-50" src="https://avatars.githubusercontent.com/u/60446729?v=4" alt="">
+        <h2 class="text-white">AKS-Bot Study Session</h2>
+    </header>
+    <main class="container text-center">
+        <h1>25:00</h1>
+        <section class="d-flex justify-content-center align-items-center mb-2">
+            <button class="btn btn-success mx-3">Start</button>
+            <button class="btn btn-danger mx-3">Stop</button>
+        </section>
+        <a href="discord://discord.com/channels/702112801526644736/">Back to Discord</a>
+    </main>
+</body>
+
+</html>

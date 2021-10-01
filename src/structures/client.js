@@ -15,11 +15,12 @@ class Client extends Discord.Client{
     constructor(){
         super({ intents })
          this.commands = new Discord.Collection()
+         this.studyMembers = new Discord.Collection()
          this.prefix = prefix
     }
 
     start(token){
-        const commandFiles = fs.readdirSync("../src/Commands").filter(file => file.endsWith(".js"))
+        const commandFiles = fs.readdirSync("./src/Commands").filter(file => file.endsWith(".js"))
         const commands = commandFiles.map(file => require(`../Commands/${file}`))
         commands.forEach(command => {
             console.log(`[INITIALIZE] -  ${command.name} command loaded`)
@@ -46,7 +47,7 @@ class Client extends Discord.Client{
 
         // Read events folder
 
-        fs.readdirSync("../src/Events")
+        fs.readdirSync("./src/Events")
             .filter(file => file.endsWith(".js"))
             .forEach(file => {
                 const event = require(`../Events/${file}`)
